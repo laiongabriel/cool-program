@@ -1,0 +1,36 @@
+{
+   "version": "2.0.0",
+   "tasks": [
+      {
+         "label": "build resources",
+         "type": "shell",
+         "command": "windres",
+         "args": ["resource.rc", "-O", "coff", "-o", "resource.o"],
+         "group": {
+            "kind": "build",
+            "isDefault": true
+         },
+         "detail": "Compile resources using windres."
+      },
+      {
+         "label": "build",
+         "type": "shell",
+         "command": "g++",
+         "args": [
+            "-O2", // Otimização para modo de liberação
+            "-static", // Compilar estaticamente
+            "${file}",
+            "resource.o",
+            "-o",
+            "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "-mwindows"
+         ],
+         "group": {
+            "kind": "build",
+            "isDefault": true
+         },
+         "problemMatcher": ["$gcc"],
+         "detail": "Generated task by VS Code."
+      }
+   ]
+}
